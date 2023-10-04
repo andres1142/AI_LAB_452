@@ -12,7 +12,7 @@ DATABASE = "./restaurant.db"
 
 def main(conn, question):
 
-    openai.api_key = os.getenv('OPEN_API_KEY')
+    openai.api_key = os.getenv('OPENAI_API_KEY')
 
     print(f"Question: {question}")
 

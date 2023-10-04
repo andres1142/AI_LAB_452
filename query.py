@@ -16,6 +16,7 @@ def select_all_from_menu(conn):
     for row in rows:
         print(row)
 
+
 def select_from_table(conn, query):
     """
     Query all rows in the tasks table
@@ -27,15 +28,16 @@ def select_from_table(conn, query):
 
     rows = cur.fetchall()
 
+    if (len(rows) == 0):
+        print("No results found.")
+
     for row in rows:
         print(row)
 
+
 if __name__ == "__main__":
-    database = "./pythonsqlite.db"
+    database = "./restaurant.db"
     conn = create_connection(database)
 
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--query", type=str, help="SELECT * FROM menu where unit_price >=55.0")
-    args = parser.parse_args()
-    print(f"Executing query: {args.query}")
-    select_from_table(conn, args.query)
+    print(f"Executing query: SELECT * FROM Employee WHERE shift = 'Morning'")
+    select_from_table(conn, "SELECT * FROM Employee WHERE shift = 'Morning'")

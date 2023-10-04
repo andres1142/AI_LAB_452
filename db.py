@@ -26,6 +26,7 @@ def create_connection(db_file):
     conn = None
     try:
         conn = sqlite3.connect(db_file)
+        print("Connection to SQLite DB successful")
     except Error as e:
         print(e)
 
@@ -46,4 +47,4 @@ def create_table(conn, create_table_sql):
 
 
 if __name__ == '__main__':
-    create_connection("db/pythonsqlite.db")
+    create_connection("./restaurant.db")

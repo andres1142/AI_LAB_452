@@ -37,7 +37,9 @@ sql_create_meals_table = """
         "calories"	INTEGER,
         "isVegan"	TEXT,
         "isGlutenFree"	TEXT,
-        PRIMARY KEY("meal_id")
+        PRIMARY KEY("meal_id"),
+        CHECK (isVegan IN ("true", "false")),
+        CHECK (isGlutenFree IN ("true," "false"))
     );
 """
 
