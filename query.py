@@ -1,4 +1,6 @@
 import argparse
+from sqlite3 import OperationalError
+
 from db import create_connection
 
 
@@ -23,16 +25,19 @@ def select_from_table(conn, query):
     :param conn: the Connection object
     :return:
     """
-    cur = conn.cursor()
-    cur.execute(query)
+    try:
+        cur = conn.cursor()
+        cur.execute(query)
 
-    rows = cur.fetchall()
+        rows = cur.fetchall()
 
-    if (len(rows) == 0):
-        print("No results found.")
+        if len(rows) == 0:
+            print("No results found.")
 
-    for row in rows:
-        print(row)
+        for row in rows:
+            print(row)
+    except OperationalError:
+        print("Something went wrong. Please try again.")
 
 
 if __name__ == "__main__":

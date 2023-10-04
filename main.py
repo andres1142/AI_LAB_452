@@ -12,7 +12,7 @@ DATABASE = "./restaurant.db"
 
 def main(conn, question):
 
-    openai.api_key = os.getenv('OPENAI_API_KEY')
+    openai.api_key = os.environ['OPENAI_API_KEY']
 
     print(f"Question: {question}")
 
@@ -32,7 +32,7 @@ def main(conn, question):
 
     q = response["choices"][0]["text"]
 
-    print(f"AI-generated SQL query: \n{q}")
+    print(f"AI-generated SQL query: \n{q}\n")
     print("Answer: \n")
     select_from_table(conn, q)
 
