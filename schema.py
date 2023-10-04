@@ -16,7 +16,8 @@ sql_create_employee_table = """
         "last_name"	INTEGER,
         "branch_id"	INTEGER,
         PRIMARY KEY("employee_id"),
-        FOREIGN KEY("branch_id") REFERENCES "Branch"("branch_id")
+        FOREIGN KEY("branch_id") REFERENCES "Branch"("branch_id"),
+        CHECK (shift IN ("Morning", "Afternoon", "Evening"))
     );
 """
 
