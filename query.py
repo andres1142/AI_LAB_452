@@ -36,8 +36,9 @@ def select_from_table(conn, query):
 
         for row in rows:
             print(row)
-    except OperationalError:
+    except OperationalError as e:
         print("Something went wrong. Please try again.")
+        print("Error message:", str(e))
 
 
 if __name__ == "__main__":

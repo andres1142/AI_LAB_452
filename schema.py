@@ -1,7 +1,7 @@
 sql_create_branch_table = """
     CREATE TABLE "Branch" (
         "branch_id"	INTEGER,
-        "location_city"	TEXT,
+        "location"	TEXT,
         "manager_id"	INTEGER,
         PRIMARY KEY("branch_id"),
         FOREIGN KEY("manager_id") REFERENCES "Employee"("employee_id")
@@ -45,7 +45,7 @@ sql_create_meals_table = """
 """
 
 sql_create_order_table = '''
-    CREATE TABLE "Order" (
+    CREATE TABLE "Orders" (
         "order_id"	INTEGER,
         "customer_id"	INTEGER,
         "total_price"	REAL,
@@ -60,6 +60,12 @@ sql_create_order_table = '''
 '''
 
 
-def get_schema():
-    schema = f"{sql_create_branch_table}{sql_create_employee_table}{sql_create_customer_table}{sql_create_meals_table}{sql_create_order_table}"
+def get_schema(conn):
+    cur = conn.cursor()
+    cur.execute("SELECT sql from SQLITE_SCHEMA WHERE sql IS NOT NULL")
+    rows = cur.fetchall()
+    schema = ""
+    for row in rows:
+      schema += row[0]
+      schema += "\n"
     return schema
