@@ -7,7 +7,7 @@ from schema import get_schema
 from query import select_from_table
 from db import create_connection
 
-DATABASE = "./restaurant.db"
+DATABASE = "file:restaurant.db"
 
 
 def main(conn, question):
@@ -18,8 +18,9 @@ def main(conn, question):
 
     prompt = f"""
     
-    Given the following SQL Schema:{get_schema()}
-    Write a SQL query to answer this question: {question}
+    Given the following SQL Schema:{get_schema(conn)}
+    For the isVegan and isGlutenFree columns, use only "true" or "false."
+    Write a sqlite query to answer the following question: {question}
     
     """
 
@@ -38,10 +39,14 @@ def main(conn, question):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    query = input("What would you like to know about the data?\n")
-    parser.add_argument("--query", type=str, default=query)
-    args = parser.parse_args()
-    conn = create_connection(DATABASE)
+    while True:
+        parser = argparse.ArgumentParser()
+        query = input("What would you like to know about the data? Type 'q' to quit\n")
+        if query == "q":
+            break
+        parser.add_argument("--query", type=str, default=query)
+        args = parser.parse_args()
+        conn = create_connection(DATABASE)
 
-    main(conn, question=args.query)
+        main(conn, question=args.query)
+
