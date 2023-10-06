@@ -1,7 +1,7 @@
 sql_create_branch_table = """
     CREATE TABLE "Branch" (
         "branch_id"	INTEGER,
-        "location_city"	TEXT,
+        "location"	TEXT,
         "manager_id"	INTEGER,
         PRIMARY KEY("branch_id"),
         FOREIGN KEY("manager_id") REFERENCES "Employee"("employee_id")
@@ -13,7 +13,7 @@ sql_create_employee_table = """
         "employee_id"	INTEGER NOT NULL,
         "shift"	TEXT,
         "first_name"	TEXT,
-        "last_name"	INTEGER,
+        "last_name"	TEXT,
         "branch_id"	INTEGER,
         PRIMARY KEY("employee_id"),
         FOREIGN KEY("branch_id") REFERENCES "Branch"("branch_id"),
@@ -45,7 +45,7 @@ sql_create_meals_table = """
 """
 
 sql_create_order_table = '''
-    CREATE TABLE "Order" (
+    CREATE TABLE "Orders" (
         "order_id"	INTEGER,
         "customer_id"	INTEGER,
         "total_price"	REAL,
